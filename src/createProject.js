@@ -8,7 +8,7 @@ export function setProjects() {
   }
 }
 
-class Builder {
+export  class Builder {
   constructor(title) {
     this.title = title;
     this.taskArray = [];
@@ -24,12 +24,14 @@ export function addNewProject(title) {
   const newProject = new Builder(title);
   projectsArray.push(newProject);
   saveProject();
+  // console.log(projectsArray)
 }
 
 export function addTask(project, task) {
   project.taskArray.push(task);
   saveProject();
+  // console.log(project.taskArray)
 }
 
 
-export default projectsArray;
+// export default projectsArray;
