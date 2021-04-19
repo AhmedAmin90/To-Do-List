@@ -7,8 +7,7 @@ test('Check Array', () => {
 describe('create a new Project', () => {
     let project = new Builder('Test');
     test('Check Project title', () => {
-      expect(project.title).toBe('Test');
-      expect(projectsArray.length).toEqual(0);
+    expect(project.title).toBe('Test');
     });
   test('Check Type of task array inside the project', () => {
     expect(typeof project.taskArray).toBe('object');
@@ -16,14 +15,15 @@ describe('create a new Project', () => {
   test('Check the length of task array without tasks', () => {
     expect(project.taskArray).toEqual([])
   });
-  test('Check Saving the project array inside the local storage', () => {
-    saveProject();
-    expect(localStorage.getItem('array')).toEqual(JSON.stringify(projectsArray));
+  test('Check The length of project array before saving the project and after saving it', () => {
+    expect(projectsArray.length).toEqual(0);
+    addNewProject(project);
+    expect(projectsArray.length).toEqual(1);
   });
   test('Adding new project to The projact array and save it in the local storage', () => {
     addNewProject('Test Two');
-    expect(projectsArray.length).toEqual(1);
-    expect(projectsArray[0].title).toEqual('Test Two');
+    expect(projectsArray.length).toEqual(2);
+    expect(projectsArray[1].title).toEqual('Test Two');
     expect(localStorage.getItem('array')).toEqual(JSON.stringify(projectsArray));
   });
   test('Adding new task to the project and save it in the local storage ', () => {
@@ -35,7 +35,6 @@ describe('create a new Project', () => {
   });
   test('Load the projects to the projects array from the local storage', () => {
     setProjects();
-    expect(projectsArray.length).toEqual(1);
+    expect(projectsArray.length).toEqual(2);
   });
-
 });
