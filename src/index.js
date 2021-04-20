@@ -11,7 +11,7 @@ import { newTask, clearInputs } from './createTaskDom';
 
 //   box.removeChild(box.firstChild);
 // }
-loadProjects();
+
 
 const newProjectBtn = document.querySelector('#new-project-btn');
 const newProjectSection = document.querySelector('#new-project-section');
@@ -24,12 +24,13 @@ const editTaskDiv = document.querySelector('#edit-task-div');
 
 
 
-fieldsRequired.classList.add('hide');
-titleRequired.classList.add('hide');
-newProjectSection.classList.add('hide');
-newTaskSection.classList.add('hide');
-editTaskDiv.classList.add('hide');
+// fieldsRequired.classList.add('hide');
+// titleRequired.classList.add('hide');
+// newProjectSection.classList.add('hide');
+// newTaskSection.classList.add('hide');
+// editTaskDiv.classList.add('hide');
 
+loadProjects();
 // Important Functions:
 
 // Makeloop function for iterationg through all project cards  
@@ -56,6 +57,7 @@ function makeLoop() {
 
 makeLoop();
 
+// Delete other tasks:
 const deleteOtherTasks = ()=> {
   let x = document.querySelectorAll('.task-box');
   for (let task of x) {
