@@ -20,6 +20,10 @@ describe('create a new Project', () => {
     addNewProject(project);
     expect(projectsArray.length).toEqual(1);
   });
+  test('Check Saving the project array inside the local storage', () => {
+    saveProject();
+    expect(localStorage.getItem('array')).toEqual(JSON.stringify(projectsArray));
+  });
   test('Adding new project to The projact array and save it in the local storage', () => {
     addNewProject('Test Two');
     expect(projectsArray.length).toEqual(2);

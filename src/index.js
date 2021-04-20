@@ -6,6 +6,11 @@ import {
 } from './createProDom';
 import { newTask, clearInputs } from './createTaskDom';
 
+// const box = document.querySelector('#project-container');
+// while (box.firstChild) {
+
+//   box.removeChild(box.firstChild);
+// }
 loadProjects();
 
 const newProjectBtn = document.querySelector('#new-project-btn');
@@ -17,17 +22,24 @@ const fieldsRequired = document.querySelector('#required-fields');
 const titleRequired = document.querySelector('#required-title');
 const editTaskDiv = document.querySelector('#edit-task-div');
 
+
+
 fieldsRequired.classList.add('hide');
 titleRequired.classList.add('hide');
 newProjectSection.classList.add('hide');
 newTaskSection.classList.add('hide');
 editTaskDiv.classList.add('hide');
 
+// Important Functions:
+
+// Makeloop function for iterationg through all project cards  
+// and add event on these cards to show the entire tasks:
 function makeLoop() {
   const projectCards = document.querySelectorAll('.project-name-card');
   for (let i = 0; i < projectCards.length; i += 1) {
     const card = projectCards[i];
     card.addEventListener('click', () => {
+      deleteOtherTasks()
       const taskCard = document.querySelector('#new-task-card');
       const projectTitleInTaskCard = document.querySelector('#new-project-task');
       projectTitleInTaskCard.textContent = card.innerText;
@@ -35,7 +47,7 @@ function makeLoop() {
       document.querySelector('#new-project-section').classList.add('hide');
       document.querySelector('#new-project-section').classList.remove('show');
       taskCard.classList.add('show');
-      const project = projectsArray.find((n) => n.title === projectTitleInTaskCard.textContent);
+      const project = projectsArray.find((p) => p.title === projectTitleInTaskCard.textContent);
       const index = projectsArray.indexOf(project);
       loadTasks(index);
     });
@@ -44,14 +56,20 @@ function makeLoop() {
 
 makeLoop();
 
+const deleteOtherTasks = ()=> {
+  let x = document.querySelectorAll('.task-box');
+  for (let task of x) {
+    task.remove()
+  }
+}
+
+
+// Events :
+
 newProjectBtn.addEventListener('click', () => {
   fieldsRequired.classList.add('hide');
   fieldsRequired.classList.remove('show');
-  let x = document.querySelector('.task-box');
-  while (x != null) {
-    x.remove(x.selectedIndex);
-    x = document.querySelector('.task-box');
-  }
+  deleteOtherTasks()
   newProjectSection.classList.add('show');
   newProjectSection.classList.remove('hide');
   newTaskSection.classList.remove('show');
@@ -72,7 +90,7 @@ addProjectBtn.addEventListener('click', () => {
     titleRequired.classList.add('hide');
     titleRequired.classList.remove('show');
     addNewProject(title);
-    loadProjects();
+    // loadProjects();
     newProjectSection.classList.add('hide');
     newProjectSection.classList.remove('show');
     document.querySelector('#project-title').value = '';

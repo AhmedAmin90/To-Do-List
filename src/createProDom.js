@@ -11,10 +11,9 @@ export function printProject() {
 
 export function loadProjects() {
   setProjects();
+  // console.log(projectsArray)
   const box = document.querySelector('#project-container');
-  while (box.firstChild) {
-    box.removeChild(box.firstChild);
-  }
+  // box.innerHTML = '';
   const lable = document.createElement('h5');
   lable.classList = 'text-warning text-center p-2';
   lable.innerText = "Project's List";
@@ -28,34 +27,30 @@ export function loadProjects() {
   }
 }
 
-loadProjects();
+
 
 function editTask(task) {
-  const editTitle = document.querySelector('#task-title-edit');
-  const editDes = document.querySelector('#task-description-edit');
-  const editDate = document.querySelector('#dueDate-edit');
-  const editPriority = document.querySelector('#priority-edit');
+  const editTitle = document.querySelector('#task-title-edit').value;
+  const editDes = document.querySelector('#task-description-edit').value;
+  const editDate = document.querySelector('#dueDate-edit').value;
+  const editPriority = document.querySelector('#priority-edit').value;
   const requiredFields = document.querySelector('#required-fields-edit-task');
-  if (!editTitle.value || !editDes.value || !editDate.value || !editPriority.value) {
+  
+  if (!editTitle || !editDes || !editDate || !editPriority) {
     requiredFields.classList.add('show');
     requiredFields.classList.remove('hide');
   } else {
     document.querySelector('#edit-task-div').classList.add('hide');
     requiredFields.classList.add('hide');
     requiredFields.classList.remove('show');
-    task.title = editTitle.value;
-    task.description = editDes.value;
-    task.dueDate = editDate.value;
-    task.priority = editPriority.value;
+    task.title = editTitle;
+    task.description = editDes;
+    task.dueDate = editDate;
+    task.priority = editPriority;
   }
 }
 
 export function loadTasks(index) {
-  let x = document.querySelector('.task-box');
-  while (x != null) {
-    x.remove(x.selectedIndex);
-    x = document.querySelector('.task-box');
-  }
   for (let i = 0; i < projectsArray[index].taskArray.length; i += 1) {
     const task = projectsArray[index].taskArray[i];
     // Create elemetns:
@@ -111,13 +106,19 @@ export function loadTasks(index) {
       taskCardPriority.classList.add('bg-danger');
       taskCardPriority.classList.remove('bg-warning', 'bg-light');
     }
+
+    // Event for Edit:
     taskCardEdit.addEventListener('click', () => {
       document.querySelector('#edit-task-div').classList.remove('hide');
+      // Load default values of the task
+      document.querySelector('#task-title-edit').value = task.title;
+      document.querySelector('#task-description-edit').value = task.description;
+      document.querySelector('#dueDate-edit').value = task.dueDate;
+      document.querySelector('#priority-edit').value = task.priority;
       const editTaskBtn = document.querySelector('#edit-task-btn');
       editTaskBtn.addEventListener('click', () => {
         editTask(task);
         saveProject();
-
         taskCardHeader.innerText = `Task Title : ${task.title}`;
         taskCardDescription.innerText = `Task Details: ${task.description}`;
         taskCardDate.innerText = `Due date : ${task.dueDate}`;
@@ -136,6 +137,8 @@ export function loadTasks(index) {
         }
       });
     });
+
+    // Evenet for Delete:
     taskCardDelete.addEventListener('click', () => {
       projectsArray[index].taskArray.splice(index, 1);
       saveProject();
