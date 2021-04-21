@@ -1,12 +1,8 @@
 export let projectsArray = [];
 
 export function setProjects() {
-  if (localStorage.length !== 0) {
-    const temp = JSON.parse(localStorage.getItem('array'));
+    const temp = JSON.parse(localStorage.getItem('array') || '[]');
     projectsArray = temp;
-    // console.log(projectsArray)
-  }
-
 }
 
 export  class Builder {
@@ -17,11 +13,9 @@ export  class Builder {
 }
 
 export function saveProject() {
-    localStorage.setItem('array', JSON.stringify(projectsArray));
-    let locals = JSON.parse(localStorage.getItem('array'));
+    let locals = JSON.parse(localStorage.getItem('array') || '[]');
     locals.push(projectsArray);
     localStorage.setItem('array', JSON.stringify(projectsArray));
-
 }
 
 export function addNewProject(title) {

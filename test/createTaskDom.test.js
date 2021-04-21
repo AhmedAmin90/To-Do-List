@@ -1,4 +1,4 @@
-import { clearInputs  } from '../src/createTaskDom';
+import { clearInputs, newTask  } from '../src/createTaskDom';
 import Task  from '../src/createTask'
 
 describe('Test' , ()=> {
@@ -24,17 +24,7 @@ describe('Test' , ()=> {
     })
 
     test('Return new task' , ()=> {
-      const newTask = jest.fn(()=> {
-        const title = document.querySelector('#task-title').value;
-        const description = document.querySelector('#task-description').value;
-        const dueDate = document.querySelector('#dueDate').value;
-        const priority = document.querySelector('#priority').value;
-        const newT = new Task(title, description, dueDate, priority);
-        clearInputs();
-        return newT;
-      })
       newTask();
-      expect(newTask).toReturn();
       expect(document.querySelector('#task-title').value).toEqual('');
       expect(document.querySelector('#priority').value).not.toEqual('3');
 

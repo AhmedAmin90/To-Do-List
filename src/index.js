@@ -1,16 +1,10 @@
 import {
-  addNewProject, projectsArray, addTask,
+  addNewProject, projectsArray, addTask
 } from './createProject';
 import {
-  loadProjects, loadTasks,
+  loadProjects, loadTasks, printProject
 } from './createProDom';
 import { newTask, clearInputs } from './createTaskDom';
-
-// const box = document.querySelector('#project-container');
-// while (box.firstChild) {
-
-//   box.removeChild(box.firstChild);
-// }
 
 
 const newProjectBtn = document.querySelector('#new-project-btn');
@@ -23,14 +17,8 @@ const titleRequired = document.querySelector('#required-title');
 const editTaskDiv = document.querySelector('#edit-task-div');
 
 
-
-// fieldsRequired.classList.add('hide');
-// titleRequired.classList.add('hide');
-// newProjectSection.classList.add('hide');
-// newTaskSection.classList.add('hide');
-// editTaskDiv.classList.add('hide');
-
 loadProjects();
+
 // Important Functions:
 
 // Makeloop function for iterationg through all project cards  
@@ -92,7 +80,7 @@ addProjectBtn.addEventListener('click', () => {
     titleRequired.classList.add('hide');
     titleRequired.classList.remove('show');
     addNewProject(title);
-    // loadProjects();
+    printProject()
     newProjectSection.classList.add('hide');
     newProjectSection.classList.remove('show');
     document.querySelector('#project-title').value = '';

@@ -1,6 +1,7 @@
 import { Builder, projectsArray, saveProject, addNewProject, addTask, setProjects} from '../src/createProject';
 
 test('Check Array', () => {
+  expect(projectsArray).toBeTruthy();
   expect(projectsArray).toEqual([]);
 })
 

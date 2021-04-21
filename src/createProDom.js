@@ -3,33 +3,30 @@ import { setProjects, saveProject, projectsArray } from './createProject';
 export function printProject() {
   const title = document.querySelector('#project-title').value;
   const projectList = document.querySelector('.project-list');
-  const projectName = document.createElement('h5');
+  const projectName = document.createElement('h6');
   projectName.innerText = title;
   projectName.classList = 'text-center text-dark bg-warning border border-light rounded m-1 p-1 project-name-card';
   projectList.appendChild(projectName);
 }
 
+
 export function loadProjects() {
   setProjects();
-  // console.log(projectsArray)
   const box = document.querySelector('#project-container');
-  // box.innerHTML = '';
   const lable = document.createElement('h5');
   lable.classList = 'text-warning text-center p-2';
   lable.innerText = "Project's List";
   box.appendChild(lable);
   for (let i = 0; i < projectsArray.length; i += 1) {
     const projectList = document.querySelector('.project-list');
-    const projectName = document.createElement('h5');
+    const projectName = document.createElement('h6');
     projectName.innerText = projectsArray[i].title;
     projectName.classList = 'text-center text-dark bg-warning border border-light rounded m-1 p-1 project-name-card';
     projectList.appendChild(projectName);
   }
 }
 
-
-
-function editTask(task) {
+export function editTask(task) {
   const editTitle = document.querySelector('#task-title-edit').value;
   const editDes = document.querySelector('#task-description-edit').value;
   const editDate = document.querySelector('#dueDate-edit').value;
