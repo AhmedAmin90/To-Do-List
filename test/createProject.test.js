@@ -1,20 +1,22 @@
-import { Builder, projectsArray, saveProject, addNewProject, addTask, setProjects} from '../src/createProject';
+import {
+  Builder, projectsArray, saveProject, addNewProject, addTask, setProjects,
+} from '../src/createProject';
 
 test('Check Array', () => {
   expect(projectsArray).toBeTruthy();
   expect(projectsArray).toEqual([]);
-})
+});
 
 describe('create a new Project', () => {
-    let project = new Builder('Test');
-    test('Check Project title', () => {
+  const project = new Builder('Test');
+  test('Check Project title', () => {
     expect(project.title).toBe('Test');
-    });
+  });
   test('Check Type of task array inside the project', () => {
     expect(typeof project.taskArray).toBe('object');
-    });
+  });
   test('Check the length of task array without tasks', () => {
-    expect(project.taskArray).toEqual([])
+    expect(project.taskArray).toEqual([]);
   });
   test('Check The length of project array before saving the project and after saving it', () => {
     expect(projectsArray.length).toEqual(0);
@@ -32,8 +34,10 @@ describe('create a new Project', () => {
     expect(localStorage.getItem('array')).toEqual(JSON.stringify(projectsArray));
   });
   test('Adding new task to the project and save it in the local storage ', () => {
-    let task = { "title": "Task", "description": "Description", "dueDate": "2021-04-21", "priority": "3" };
-    addTask(project, task );
+    const task = {
+      title: 'Task', description: 'Description', dueDate: '2021-04-21', priority: '3',
+    };
+    addTask(project, task);
     expect(project.title).toEqual('Test');
     expect(project.taskArray).toEqual([task]);
     expect(localStorage.getItem('array')).toEqual(JSON.stringify(projectsArray));

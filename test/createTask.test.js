@@ -1,7 +1,7 @@
-import Task from '../src/createTask'
+import Task from '../src/createTask';
 
-describe('Create a new Task' , ()=> {
-  let task = new Task('Task', 'Description', '2021-04-21', '1');
+describe('Create a new Task', () => {
+  const task = new Task('Task', 'Description', '2021-04-21', '1');
   test('Check Project title', () => {
     expect(task.title).toEqual('Task');
     expect(task.description).toEqual('Description');
@@ -14,4 +14,4 @@ describe('Create a new Task' , ()=> {
     expect(typeof task.dueDate).toEqual('string');
     expect(typeof task.priority).toEqual('string');
   });
-})
+});

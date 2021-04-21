@@ -1,11 +1,10 @@
 import {
-  addNewProject, projectsArray, addTask
+  addNewProject, projectsArray, addTask,
 } from './createProject';
 import {
-  loadProjects, loadTasks, printProject
+  loadProjects, loadTasks, printProject,
 } from './createProDom';
 import { newTask, clearInputs } from './createTaskDom';
-
 
 const newProjectBtn = document.querySelector('#new-project-btn');
 const newProjectSection = document.querySelector('#new-project-section');
@@ -14,21 +13,27 @@ const newTaskSection = document.querySelector('#new-task-card');
 const newTaskBtn = document.querySelector('#add-task-btn');
 const fieldsRequired = document.querySelector('#required-fields');
 const titleRequired = document.querySelector('#required-title');
-const editTaskDiv = document.querySelector('#edit-task-div');
-
 
 loadProjects();
 
 // Important Functions:
 
-// Makeloop function for iterationg through all project cards  
+// Delete other tasks:
+const deleteOtherTasks = () => {
+  const x = document.querySelectorAll('.task-box');
+  for (let i = 0; i < x.length; i += 1) {
+    x[i].remove();
+  }
+};
+
+// Makeloop function for iterationg through all project cards
 // and add event on these cards to show the entire tasks:
 function makeLoop() {
   const projectCards = document.querySelectorAll('.project-name-card');
   for (let i = 0; i < projectCards.length; i += 1) {
     const card = projectCards[i];
     card.addEventListener('click', () => {
-      deleteOtherTasks()
+      deleteOtherTasks();
       const taskCard = document.querySelector('#new-task-card');
       const projectTitleInTaskCard = document.querySelector('#new-project-task');
       projectTitleInTaskCard.textContent = card.innerText;
@@ -45,21 +50,12 @@ function makeLoop() {
 
 makeLoop();
 
-// Delete other tasks:
-const deleteOtherTasks = ()=> {
-  let x = document.querySelectorAll('.task-box');
-  for (let task of x) {
-    task.remove()
-  }
-}
-
-
 // Events :
 
 newProjectBtn.addEventListener('click', () => {
   fieldsRequired.classList.add('hide');
   fieldsRequired.classList.remove('show');
-  deleteOtherTasks()
+  deleteOtherTasks();
   newProjectSection.classList.add('show');
   newProjectSection.classList.remove('hide');
   newTaskSection.classList.remove('show');
@@ -80,7 +76,7 @@ addProjectBtn.addEventListener('click', () => {
     titleRequired.classList.add('hide');
     titleRequired.classList.remove('show');
     addNewProject(title);
-    printProject()
+    printProject();
     newProjectSection.classList.add('hide');
     newProjectSection.classList.remove('show');
     document.querySelector('#project-title').value = '';

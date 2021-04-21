@@ -9,7 +9,6 @@ export function printProject() {
   projectList.appendChild(projectName);
 }
 
-
 export function loadProjects() {
   setProjects();
   const box = document.querySelector('#project-container');
@@ -32,7 +31,7 @@ export function editTask(task) {
   const editDate = document.querySelector('#dueDate-edit').value;
   const editPriority = document.querySelector('#priority-edit').value;
   const requiredFields = document.querySelector('#required-fields-edit-task');
-  
+
   if (!editTitle || !editDes || !editDate || !editPriority) {
     requiredFields.classList.add('show');
     requiredFields.classList.remove('hide');
@@ -82,7 +81,6 @@ export function loadTasks(index) {
     taskCardDiv.appendChild(taskCardPriority);
     taskCardDiv.appendChild(taskCardEdit);
     taskCardDiv.appendChild(taskCardDelete);
-
 
     // Fill the data
     taskCardEdit.innerText = 'Edit This Task';
